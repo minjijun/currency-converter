@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환율 계산기</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="rates">
+        <h2>환율 정보</h2>
+        <p>기준 통화: 1 KRW</p>
+        {% for currency, rate in rates.items() %}
+            <p>{{ currency }}: {{ (1/rate)|round(6) }} KRW</p>
+        {% endfor %}
+    </div>
+    <div id="converter">
+        <h2>환율 변환</h2>
+        <form id="convert-form">
+            <label for="amount">금액:</label>
+            <input type="number" id="amount" name="amount" required><br><br>
+            
+            <label for="from_currency">변환 전:</label>
+            <select id="from_currency" name="from_currency">
+                {% for currency in rates.keys() %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                {% endfor %}
+            </select><br><br>
+            
+            <label for="to_currency">변환 후:</label>
+            <select id="to_currency" name="to_currency">
+                {% for currency in rates.keys() %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                {% endfor %}
+            </select><br><br>
+            
+            <button type="submit">변환</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#convert-form').submit(function(e) {
+                e.preventDefault();
+                $.post('/convert', $(this).serialize(), function(data) {
+                    $('#result').text(data.result);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

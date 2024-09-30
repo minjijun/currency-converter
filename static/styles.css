@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#rates, #converter {
+    flex: 1;
+    padding: 20px;
+}
+
+#rates {
+    background-color: #f0f0f0;
+}
+
+#converter {
+    background-color: #e0e0e0;
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input, select, button {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+}
